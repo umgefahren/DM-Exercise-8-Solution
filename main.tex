@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsthm}
+\usepackage{amsfonts}
+\usepackage{stmaryrd}
+
+
+\title{DM-Exercise-8-Solution}
+\author{Hannes Furmans }
+\date{November 2021}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\textbf{a)} The statement of \textit{if and only if} basically formalizes as $A \iff B$, where $A := \phi \text{is idempotent}$ and $B := \cdot \text{is associative}$. Therefore our proof needs two steps:
+\begin{itemize}
+    \item $A \Rightarrow B$
+    \item $B \Rightarrow A$
+\end{itemize}
+
+We start with the proof of $A \Rightarrow B$.
+The definition of associativity is the following:
+\begin{displaymath}
+a * (b*c) = (a*b) *c \qquad \text{for} \: \text{all} \: \forall a,b,c \in S
+\end{displaymath}
+We apply the definition of $\langle G ; \cdot \rangle$ with respect to the group homomorphism $\psi : G \rightarrow G$ and get:
+\begin{displaymath}
+\psi (\psi(a) * \psi(b)) * \psi(c) = \psi(x) * \psi(\psi(y) * \psi(z)) \qquad \text{with} \: a,b,c \in G
+\end{displaymath}
+We use the \textbf{Definition 5.10.}:
+\begin{displaymath}
+\psi(\psi(a * b)) * \psi(c) = \psi(a) * \psi(\psi(b * c))
+\end{displaymath}
+Assuming that $\psi$ is idempotent we get:
+%\begin{displaymath}
+\begin{align*}
+\psi(a*b) * \psi(c) &= \psi(a) * \psi(b * c) \qquad \text{(Using the definition of homomorphism)}\\
+\dot\Rightarrow \qquad \psi(a) * \psi(b) * \psi(c) &= \psi(a) * \psi(b) * \psi(c) \\
+\end{align*}
+We have shown that, assuming $\psi$ is idempotent the binary operation $\cdot$ is associative.
+
+We now show proof of $B \Rightarrow A$.
+We begin with a trivial statement and develop from that a broader statement under the assumption that $\cdot$ is associative.
+\begin{align*}
+a\cdot b\cdot c&=a\cdot b\cdot c & \text{(Assuming associativity.)} \\
+\dot\Rightarrow\quad   ( a \cdot b ) \cdot c &= a \cdot  b \cdot c  & \text{(Using the definition of} \: \psi \text{)} \\
+\dot\Rightarrow\quad   \psi(\psi(a) * \psi(b)) * \psi(c) &= \psi(a) * \psi(b) * \psi(c) & \text{(Adding the inverse of} \: \psi(c) \text{)} \\
+\dot\Rightarrow\quad \psi(\psi(a) * \psi(b)) * \psi(c) * \widehat{\psi(c)} &= \psi(a) * \psi(b) * \psi(c) * \widehat{\psi(c)} & \text{(Using G2)} \\
+\dot\Rightarrow\quad \psi(\psi(a) * \psi(b)) &= \psi(a) * \psi(b) \\
+\end{align*}
+We can clearly see that, with the group axioms, the idempotenz of the operation $\psi$ is a direct product of the definition of $\cdot$ and it's assumed property of associativity. \qed
+
+\break
+\textbf{b)} We'll show that the statement is false.
+To check wether an algebraic structure is a monoid we have to check wether the following two conditions are true, if so the structure is a monoid:
+\begin{itemize}
+    \item Associativity
+    \item The existence of a neutral element
+\end{itemize}
+
+We've already shown that $\langle G; \cdot \rangle$ is associative if and only if $\psi$ is idempotent so the question is, wether $e' \in G$ is a neutral element. We know from \textbf{Lemma 5.5} that for any group homomorphism $\psi$ from $\langle G ; *, \hat{\:}, e\rangle$ to $\langle H; \star, \Tilde{}, e'\rangle$ satisfies $\psi(e) = e'$. Since our $\psi$ is defined as $\psi : G \rightarrow G$ so the lemma would be: $\psi(e) = e$. From that we develop, with the definition of the neutral element:
+\begin{align*}
+    e' \cdot a &= a  &\text{(Definition of} \cdot \text{)} \\
+    \dot\Rightarrow\quad \psi(e') * \psi(a) &= a
+\end{align*}
+This statement is not true, because there is now general $e'$ that fills that. To show that we give a counterexample. As a group we use the set $\mathbb{Z}$ and the binary operation of $+$. This builds the group $Z := \langle \mathbb{Z}; +,-,0\rangle$ the proof, that this is in fact a group is trivial and is omitted here. We now define a corresponding function $\psi : Z \to Z$ as $\psi : x \mapsto 1$ with $x \in Z$. Obviously this still makes the algebraic structure $\langle Z; \cdot \rangle$ associative, because:
+
+\[
+\begin{array}{lrclr}
+    &\psi(\psi(a) * \psi(b)) * \psi(c) &=& \psi(a) * \psi(\psi(b) * \psi(c)) &\text{(Applying our definition of } \psi \text{)}\\
+    \dot\Rightarrow& \psi(1 + 1) + 1 &=& 1 + \psi(1 + 1) &\text{(Applying elementary school math)}\\
+    \dot\Rightarrow& \psi(2) + 1 &=& 1 + \psi(2) &\text{(Applying our definition of } \psi \text{)}\\
+    \dot\Rightarrow& 1 + 1 &=& 1 + 1 &\text{(Applying elementary school math)} \\
+    \dot\Rightarrow&2 &=& 2 &
+\end{array}
+\]
+Every first-grader could now verify that this is still associative, because the binary operator $\cdot$ is now basically a constant.
+With all these definitions we can give a trivial counterexample to show, that there's now such general neutral element for every valid definition of $G$ and $\psi$. We choose an element $3 \in \mathbb{Z}$. If there is a neutral element $e$ the following must be true:
+\begin{align*}
+    3 \cdot e &= 3 &\text{(Applying the general definition of }\cdot\text{ and the group } Z \text{)}\\
+    \psi(3) + \psi(e) &= 3 &\text{(Applying our definition of } \psi \text{)} \\
+    1 + 1 &= 3 &\lightning
+\end{align*}
+We can see that this is not true. We've now shown that we can construct an example that is fully compatible with our requirements but is false, thus a general neutral element does not exist. \qed
+
+
+\end{document}
